@@ -1,0 +1,40 @@
+
+
+#' Extract UK post codes from a string
+#'
+#' @param string A character string which may contain a post code.
+#'
+#' @return A tibble with 4 columns containing the original string, a logical
+#' indicated whether a postcode was detected, a redacted string and the redacted
+#' terms.
+#' @export
+#'
+#' @examples
+#'
+#' post_code_from_string("The postcode for Big Ben is SW1A 0AA.")
+#'
+post_code_from_string<-function(string){
+
+  if (!is.character(string)) {
+    stop("Can only work with text/string")
+  }
+
+pcd_regex = "[Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) {0,1}[0-9][A-Za-z]{2})"
+
+# 3. Check if a postcode is present in each address or not (return TRUE if present, else FALSE)
+detected <- grepl(pcd_regex, string)
+
+# 4. Extract postcodes matching the regular expression for a valid UK postcode
+extracted <- regmatches(string, gregexpr(pcd_regex, string))
+
+
+redacted_string<-gsub(pcd_regex,"<#redacted_post_code#>",string)
+
+return(dplyr::tibble(string=string,
+              detected=detected,
+              redacted=redacted_string,
+              extracted=extracted))
+
+}
+
+
