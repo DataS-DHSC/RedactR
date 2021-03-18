@@ -24,4 +24,4 @@ on which it depends.
 ## Installation
 The package can be installed directly from github within R via the package
 ```devtools```. Simply run this code in the R console:
-```devtools::install_github("https://github.com/DataS-DHSC/RedactR")
+```devtools::install_github("https://github.com/DataS-DHSC/RedactR")```
