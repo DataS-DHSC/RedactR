@@ -1,5 +1,5 @@
-
-#' Extract UK phone numbers from a string
+#' @title redact_phone_number
+#' @description Extract UK phone numbers from a string
 #'
 #' @param string A character string which may contain a phone number.
 #'
@@ -14,7 +14,7 @@
 #' phone_number_code_from_string("+447123123123")
 #'
 #'
-phone_number_code_from_string <- function(string) {
+redact_phone_number <- function(string) {
   if (!is.character(string)) {
     stop("Can only work with text/string")
   }

@@ -1,7 +1,5 @@
-
-
-
-#' Extract UK post codes from a string
+#' @title redact_post_code
+#' @description  Extract UK post codes from a string.
 #'
 #' @param string A character string which may contain a post code.
 #'
@@ -14,7 +12,7 @@
 #'
 #' post_code_from_string("The postcode for Big Ben is SW1A 0AA.")
 #'
-post_code_from_string <- function(string) {
+redact_post_code <- function(string) {
   if (!is.character(string)) {
     stop("Can only work with text/string")
   }
