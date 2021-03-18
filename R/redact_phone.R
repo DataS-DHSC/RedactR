@@ -20,7 +20,7 @@ redact_phone_number <- function(string) {
   }
 
   # Regex for target data
-  regex = "((\\+44(\\s\\(0\\)\\s|\\s0\\s|\\s)?)|0)7\\d{3}(\\s)?\\d{6}"
+  regex = "(((\\+44\\s?\\d{4}|\\(?0\\d{4}\\)?)\\s?\\d{3}\\s?\\d{3})|((\\+44\\s?\\d{3}|\\(?0\\d{3}\\)?)\\s?\\d{3}\\s?\\d{4})|((\\+44\\s?\\d{2}|\\(?0\\d{2}\\)?)\\s?\\d{4}\\s?\\d{4}))(\\s?\\#(\\d{4}|\\d{3}))?"
 
   # Check if data are present (return TRUE if present, else FALSE)
   detected <- grepl(regex, string)
