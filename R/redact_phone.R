@@ -1,26 +1,26 @@
 
-
-
-#' Extract UK post codes from a string
+#' Extract UK phone numbers from a string
 #'
-#' @param string A character string which may contain a post code.
+#' @param string A character string which may contain a phone number.
 #'
 #' @return A tibble with 4 columns containing the original string, a logical
-#' indicated whether a postcode was detected, a redacted string and the redacted
+#' indicated whether a phone number was detected, a redacted string and the redacted
 #' terms.
 #' @export
 #'
 #' @examples
 #'
-#' post_code_from_string("The postcode for Big Ben is SW1A 0AA.")
+#' phone_number_code_from_string("07123123123")
+#' phone_number_code_from_string("+447123123123")
 #'
-post_code_from_string <- function(string) {
+#'
+phone_number_code_from_string <- function(string) {
   if (!is.character(string)) {
     stop("Can only work with text/string")
   }
 
   # Regex for target data
-  regex = "[Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) {0,1}[0-9][A-Za-z]{2})"
+  regex = "((\\+44(\\s\\(0\\)\\s|\\s0\\s|\\s)?)|0)7\\d{3}(\\s)?\\d{6}"
 
   # Check if data are present (return TRUE if present, else FALSE)
   detected <- grepl(regex, string)
@@ -29,8 +29,7 @@ post_code_from_string <- function(string) {
   extracted <- regmatches(string, gregexpr(regex, string))
 
   # Redact data from string
-  redacted_string <- gsub(regex, "<#redacted_post_code#>", string)
-
+  redacted_string <- gsub(regex, "<#redacted_phone_number#>", string)
 
   return(
     dplyr::tibble(
@@ -42,3 +41,4 @@ post_code_from_string <- function(string) {
   )
 
 }
+
