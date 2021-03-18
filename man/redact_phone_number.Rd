@@ -19,8 +19,8 @@ Extract UK phone numbers from a string
 }
 \examples{
 
-phone_number_code_from_string("07123123123")
-phone_number_code_from_string("+447123123123")
+redact_phone_number("07123123123")
+redact_phone_number("+447123123123")
 
 
 }

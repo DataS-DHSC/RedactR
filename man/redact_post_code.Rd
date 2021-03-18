@@ -19,6 +19,6 @@ Extract UK post codes from a string.
 }
 \examples{
 
-post_code_from_string("The postcode for Big Ben is SW1A 0AA.")
+redact_post_code("The postcode for Big Ben is SW1A 0AA.")
 
 }

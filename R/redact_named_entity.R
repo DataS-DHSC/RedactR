@@ -1,20 +1,3 @@
-#' @title python_setup
-#' @description This function checks installs the python library spacy and the
-#' English language model on which named entity extraction relies. You must have
-#' python installed already for this to work.
-#'
-#' @export
-#'
-python_setup <- function() {
-  system("pip install spacy")#install spacy
-  system("python -m spacy download en_core_web_sm")
-  spacyr::spacy_initialize(model = "en_core_web_sm")
-}
-
-
-
-
-
 #' @title redact_named_entities
 #'
 #' @description Relies on python_setup having run successfully.
@@ -26,6 +9,9 @@ python_setup <- function() {
 #' indicated whether a named entity was detected, a redacted string and the redacted
 #' terms.
 #' @export
+#' @importFrom dplyr tibble
+#' @importFrom spacyr spacy_extract_entity
+#' @importFrom stringi stri_replace_all_fixed
 #'
 redact_named_entities <- function(string) {
 
@@ -35,7 +21,7 @@ redact_named_entities <- function(string) {
 
   extracted <- spacyr::spacy_extract_entity(string, type = "named")
 
-  out <- tibble(
+  out <- dplyr::tibble(
     text = string,
     detected = FALSE,
     redacted = NA,
@@ -49,7 +35,7 @@ redact_named_entities <- function(string) {
 
     redacted = stringi::stri_replace_all_fixed(string, pattern, replacement, vectorize_all = F)
 
-    out <- tibble(
+    out <- dplyr::tibble(
       string = string,
       detected = TRUE,
       redacted = redacted,

@@ -10,7 +10,7 @@
 #'
 #' @examples
 #'
-#' post_code_from_string("The postcode for Big Ben is SW1A 0AA.")
+#' redact_post_code("The postcode for Big Ben is SW1A 0AA.")
 #'
 redact_post_code <- function(string) {
   if (!is.character(string)) {

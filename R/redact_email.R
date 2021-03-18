@@ -1,35 +1,34 @@
-#' @title redact_phone_number
+#' @title redact_email
 #' @description Extract UK phone numbers from a string
 #'
 #' @param string A character string which may contain a phone number.
 #'
 #' @return A tibble with 4 columns containing the original string, a logical
-#' indicated whether a phone number was detected, a redacted string and the redacted
+#' indicated whether an email address was detected, a redacted string and the redacted
 #' terms.
 #' @export
 #'
 #' @examples
 #'
-#' redact_phone_number("07123123123")
-#' redact_phone_number("+447123123123")
+#' redact_email("test.email@mailserver.com")
 #'
 #'
-redact_phone_number <- function(string) {
+redact_email <- function(string) {
   if (!is.character(string)) {
     stop("Can only work with text/string")
   }
 
   # Regex for target data
-  regex = "((\\+44(\\s\\(0\\)\\s|\\s0\\s|\\s)?)|0)7\\d{3}(\\s)?\\d{6}"
+  regex = "([_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4}))"
 
   # Check if data are present (return TRUE if present, else FALSE)
   detected <- grepl(regex, string)
 
-  # Extract data matching the regular expression for a phone number
+  # Extract data matching the regular expression for a valid email adress
   extracted <- regmatches(string, gregexpr(regex, string))
 
   # Redact data from string
-  redacted_string <- gsub(regex, "<#redacted_phone_number#>", string)
+  redacted_string <- gsub(regex, "<#redacted_email_address#>", string)
 
   return(
     dplyr::tibble(
