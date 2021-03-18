@@ -25,3 +25,28 @@ on which it depends.
 The package can be installed directly from github within R via the package
 ```devtools```. Simply run this code in the R console:
 ```devtools::install_github("https://github.com/DataS-DHSC/RedactR")```
+
+## Usage
+
+All the redaction functions accept a string as their only argument. 
+
+You will need to run ```python_setup()``` before named entity extraction will work.
+
+For postcodes:
+
+```redact_post_code("the postcode for Big Ben is SW1A 0AA.")```
+
+For phone numbers:
+
+```redact_phone_number("the telephone number for the house of commons is 020 7219 4272")```
+
+For email addresses:
+```redact_email("The prime ministers email address is boris.johnson.mp@parliament.uk")```
+
+For named enities:
+```redact_named_entities("The prime ministers name is Boris Johnson")```
+
+For everything:
+```redact_all("The prime ministers name is Boris Johnson, his emial is boris.johnson.mp@parliament.uk, he works at SW1A 0AA and the phone number there is 020 7219 4272")```
+
+
