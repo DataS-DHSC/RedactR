@@ -43,10 +43,16 @@ For phone numbers:
 For email addresses:
 ```redact_email("The prime ministers email address is boris.johnson.mp@parliament.uk")```
 
-For named enities:
+For named entities:
 ```redact_named_entities("The prime ministers name is Boris Johnson")```
 
-For everything:
+All of the above functions return tibbles indicating whether something potentially
+sensitive was detected, and presenting a redacted version of the input string with
+the flagged terms extracted, which may be useful if you are looking to extract
+post codes for example from data for analysis you have permission for.
+
+
+To redact everything you can with these functions:
 ```redact_all("The prime ministers name is Boris Johnson, his emial is boris.johnson.mp@parliament.uk, he works at SW1A 0AA and the phone number there is 020 7219 4272")```
 
 
